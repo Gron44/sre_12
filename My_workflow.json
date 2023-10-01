@@ -1,0 +1,252 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "bffa2b03-a029-4fee-ad67-ce250972a131",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://xmlcalendar.ru/data/ru/2022/calendar.csv",
+        "options": {
+          "redirect": {},
+          "response": {
+            "response": {
+              "fullResponse": false,
+              "neverError": false,
+              "responseFormat": "file",
+              "outputPropertyName": "data"
+            }
+          }
+        }
+      },
+      "id": "76642da3-fe02-4aa8-add3-9dd5347e5891",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1360,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://xmlcalendar.ru/data/ru/2022/calendar.json",
+        "options": {}
+      },
+      "id": "1a659684-e0da-4de6-982c-fd2473983f6c",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1360,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "fileFormat": "html",
+        "options": {}
+      },
+      "id": "5236ad92-9856-4cc0-819d-a29944d32beb",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "year",
+              "field2": "Год/Месяц"
+            }
+          ]
+        },
+        "fuzzyCompare": true,
+        "options": {}
+      },
+      "id": "3abf59e2-6643-4fb1-bb1e-019959ae126f",
+      "name": "Compare Datasets2",
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        1940,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "keys": {
+          "key": [
+            {
+              "currentKey": "ÐÐ¾Ð´/ÐÐµÑÑÑ",
+              "newKey": "Год/Месяц"
+            },
+            {
+              "currentKey": "Ð¯Ð½Ð²Ð°ÑÑ",
+              "newKey": "Январь"
+            },
+            {
+              "currentKey": "Ð¤ÐµÐ²ÑÐ°Ð»Ñ",
+              "newKey": "Февраль"
+            },
+            {
+              "currentKey": "ÐÐ°ÑÑ",
+              "newKey": "Март"
+            },
+            {
+              "currentKey": "ÐÐ¿ÑÐµÐ»Ñ",
+              "newKey": "Апрель"
+            },
+            {
+              "currentKey": "ÐÐ°Ð¹",
+              "newKey": "Май"
+            },
+            {
+              "currentKey": "ÐÑÐ½Ñ",
+              "newKey": "Июнь"
+            },
+            {
+              "currentKey": "ÐÑÐ»Ñ",
+              "newKey": "Июль"
+            },
+            {
+              "currentKey": "ÐÐ²Ð³ÑÑÑ",
+              "newKey": "Август"
+            },
+            {
+              "currentKey": "Ð¡ÐµÐ½ÑÑÐ±ÑÑ",
+              "newKey": "Сентябрь"
+            },
+            {
+              "currentKey": "ÐÐºÑÑÐ±ÑÑ",
+              "newKey": "Октябрь"
+            },
+            {
+              "currentKey": "ÐÐ¾ÑÐ±ÑÑ",
+              "newKey": "Ноябрь"
+            },
+            {
+              "currentKey": "ÐÐµÐºÐ°Ð±ÑÑ",
+              "newKey": "Декабрь"
+            },
+            {
+              "currentKey": "['ÐÑÐµÐ³Ð¾ ÑÐ°Ð±Ð¾ÑÐ¸Ñ Ð´Ð½ÐµÐ¹']",
+              "newKey": "Всего рабочих дней"
+            },
+            {
+              "currentKey": "['ÐÑÐµÐ³Ð¾ Ð¿ÑÐ°Ð·Ð´Ð½Ð¸ÑÐ½ÑÑ Ð¸ Ð²ÑÑÐ¾Ð´Ð½ÑÑ Ð´Ð½ÐµÐ¹']",
+              "newKey": "Всего праздничных и выходных дней"
+            },
+            {
+              "currentKey": "['ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ ÑÐ°Ð±Ð¾ÑÐ¸Ñ ÑÐ°ÑÐ¾Ð² Ð¿ÑÐ¸ 40-ÑÐ°ÑÐ¾Ð²Ð¾Ð¹ ÑÐ°Ð±Ð¾ÑÐµÐ¹ Ð½ÐµÐ´ÐµÐ»Ðµ']",
+              "newKey": "Количество рабочих часов при 40-часовой рабочей неделе"
+            },
+            {
+              "currentKey": "['ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ ÑÐ°Ð±Ð¾ÑÐ¸Ñ ÑÐ°ÑÐ¾Ð² Ð¿ÑÐ¸ 36-ÑÐ°ÑÐ¾Ð²Ð¾Ð¹ ÑÐ°Ð±Ð¾ÑÐµÐ¹ Ð½ÐµÐ´ÐµÐ»Ðµ']",
+              "newKey": "Количество рабочих часов при 36-часовой рабочей неделе"
+            },
+            {
+              "currentKey": "['ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ ÑÐ°Ð±Ð¾ÑÐ¸Ñ ÑÐ°ÑÐ¾Ð² Ð¿ÑÐ¸ 24-ÑÐ°ÑÐ¾Ð²Ð¾Ð¹ ÑÐ°Ð±Ð¾ÑÐµÐ¹ Ð½ÐµÐ´ÐµÐ»Ðµ']",
+              "newKey": "Количество рабочих часов при 24-часовой рабочей неделе"
+            }
+          ]
+        },
+        "additionalOptions": {}
+      },
+      "id": "a07fad12-ac21-4597-b04a-f88cf019e93c",
+      "name": "Rename Keys",
+      "type": "n8n-nodes-base.renameKeys",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        540
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Rename Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Keys": {
+      "main": [
+        [
+          {
+            "node": "Compare Datasets2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6ab877bb-7565-48e2-9287-641d096f5331",
+  "id": "iLBY8gaygDDmaBsl",
+  "meta": {
+    "instanceId": "bb8644d21ea19b547386158a5bd337d23755d71d8638996e47c2fdaf6b2fdab2"
+  },
+  "tags": []
+}
