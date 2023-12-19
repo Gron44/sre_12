@@ -3,13 +3,13 @@
   "nodes": [
     {
       "parameters": {},
-      "id": "bffa2b03-a029-4fee-ad67-ce250972a131",
+      "id": "6dcc555d-0989-4cdb-bf5d-85d4fdbb272e",
       "name": "When clicking \"Execute Workflow\"",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        1140,
-        540
+        1080,
+        360
       ]
     },
     {
@@ -27,13 +27,13 @@
           }
         }
       },
-      "id": "76642da3-fe02-4aa8-add3-9dd5347e5891",
+      "id": "baf61c55-b7ea-4d07-af77-f64ac3aaf71b",
       "name": "HTTP Request",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1360,
-        540
+        1300,
+        360
       ]
     },
     {
@@ -41,27 +41,29 @@
         "url": "http://xmlcalendar.ru/data/ru/2022/calendar.json",
         "options": {}
       },
-      "id": "1a659684-e0da-4de6-982c-fd2473983f6c",
+      "id": "017b2201-9d7b-4fb3-b4f3-a2dfa716712c",
       "name": "HTTP Request1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1360,
-        380
+        1300,
+        200
       ]
     },
     {
       "parameters": {
         "fileFormat": "html",
-        "options": {}
+        "options": {
+          "readAsString": true
+        }
       },
-      "id": "5236ad92-9856-4cc0-819d-a29944d32beb",
+      "id": "dcff4a6a-63d5-4bbd-93a8-056fba87ee19",
       "name": "Spreadsheet File",
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 2,
       "position": [
-        1540,
-        540
+        1480,
+        360
       ]
     },
     {
@@ -70,109 +72,138 @@
           "values": [
             {
               "field1": "year",
-              "field2": "Год/Месяц"
+              "field2": "[\"Год/Месяц\"]"
             }
           ]
         },
-        "fuzzyCompare": true,
-        "options": {}
+        "options": {
+          "skipFields": ""
+        }
       },
-      "id": "3abf59e2-6643-4fb1-bb1e-019959ae126f",
+      "id": "d8db5b83-09b1-4517-9bb1-860855b43ebd",
       "name": "Compare Datasets2",
       "type": "n8n-nodes-base.compareDatasets",
       "typeVersion": 2.3,
       "position": [
-        1940,
-        400
+        1920,
+        480
       ]
     },
     {
       "parameters": {
-        "keys": {
-          "key": [
+        "fields": {
+          "values": [
             {
-              "currentKey": "ÐÐ¾Ð´/ÐÐµÑÑÑ",
-              "newKey": "Год/Месяц"
+              "name": "Год/Месяц",
+              "type": "numberValue",
+              "numberValue": "={{ $json.year }}"
             },
             {
-              "currentKey": "Ð¯Ð½Ð²Ð°ÑÑ",
-              "newKey": "Январь"
+              "name": "Январь",
+              "stringValue": "={{ $json.months[0].days }}"
             },
             {
-              "currentKey": "Ð¤ÐµÐ²ÑÐ°Ð»Ñ",
-              "newKey": "Февраль"
+              "name": "Февраль",
+              "stringValue": "={{ $json.months[1].days }}"
             },
             {
-              "currentKey": "ÐÐ°ÑÑ",
-              "newKey": "Март"
+              "name": "Март",
+              "stringValue": "={{ $json.months[2].days }}"
             },
             {
-              "currentKey": "ÐÐ¿ÑÐµÐ»Ñ",
-              "newKey": "Апрель"
+              "name": "Апрель",
+              "stringValue": "={{ $json.months[3].days }}"
             },
             {
-              "currentKey": "ÐÐ°Ð¹",
-              "newKey": "Май"
+              "name": "Май",
+              "stringValue": "={{ $json.months[4].days }}"
             },
             {
-              "currentKey": "ÐÑÐ½Ñ",
-              "newKey": "Июнь"
+              "name": "Июнь",
+              "stringValue": "={{ $json.months[5].days }}"
             },
             {
-              "currentKey": "ÐÑÐ»Ñ",
-              "newKey": "Июль"
+              "name": "Июль",
+              "stringValue": "={{ $json.months[6].days }}"
             },
             {
-              "currentKey": "ÐÐ²Ð³ÑÑÑ",
-              "newKey": "Август"
+              "name": "Август",
+              "stringValue": "={{ $json.months[7].days }}"
             },
             {
-              "currentKey": "Ð¡ÐµÐ½ÑÑÐ±ÑÑ",
-              "newKey": "Сентябрь"
+              "name": "Сентябрь",
+              "stringValue": "={{ $json.months[8].days }}"
             },
             {
-              "currentKey": "ÐÐºÑÑÐ±ÑÑ",
-              "newKey": "Октябрь"
+              "name": "Октябрь",
+              "stringValue": "={{ $json.months[9].days }}"
             },
             {
-              "currentKey": "ÐÐ¾ÑÐ±ÑÑ",
-              "newKey": "Ноябрь"
+              "name": "Ноябрь",
+              "stringValue": "={{ $json.months[10].days }}"
             },
             {
-              "currentKey": "ÐÐµÐºÐ°Ð±ÑÑ",
-              "newKey": "Декабрь"
+              "name": "Декабрь",
+              "stringValue": "={{ $json.months[11].days }}"
             },
             {
-              "currentKey": "['ÐÑÐµÐ³Ð¾ ÑÐ°Ð±Ð¾ÑÐ¸Ñ Ð´Ð½ÐµÐ¹']",
-              "newKey": "Всего рабочих дней"
+              "name": "Всего рабочих дней",
+              "type": "numberValue",
+              "numberValue": "={{ $json.statistic.workdays }}"
             },
             {
-              "currentKey": "['ÐÑÐµÐ³Ð¾ Ð¿ÑÐ°Ð·Ð´Ð½Ð¸ÑÐ½ÑÑ Ð¸ Ð²ÑÑÐ¾Ð´Ð½ÑÑ Ð´Ð½ÐµÐ¹']",
-              "newKey": "Всего праздничных и выходных дней"
+              "name": "Всего праздничных и выходных дней",
+              "type": "numberValue",
+              "numberValue": "={{ $json.statistic.holidays }}"
             },
             {
-              "currentKey": "['ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ ÑÐ°Ð±Ð¾ÑÐ¸Ñ ÑÐ°ÑÐ¾Ð² Ð¿ÑÐ¸ 40-ÑÐ°ÑÐ¾Ð²Ð¾Ð¹ ÑÐ°Ð±Ð¾ÑÐµÐ¹ Ð½ÐµÐ´ÐµÐ»Ðµ']",
-              "newKey": "Количество рабочих часов при 40-часовой рабочей неделе"
+              "name": "Количество рабочих часов при 40-часовой рабочей неделе",
+              "type": "numberValue",
+              "numberValue": "={{ $json.statistic.hours40 }}"
             },
             {
-              "currentKey": "['ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ ÑÐ°Ð±Ð¾ÑÐ¸Ñ ÑÐ°ÑÐ¾Ð² Ð¿ÑÐ¸ 36-ÑÐ°ÑÐ¾Ð²Ð¾Ð¹ ÑÐ°Ð±Ð¾ÑÐµÐ¹ Ð½ÐµÐ´ÐµÐ»Ðµ']",
-              "newKey": "Количество рабочих часов при 36-часовой рабочей неделе"
+              "name": "Количество рабочих часов при 36-часовой рабочей неделе",
+              "type": "numberValue",
+              "numberValue": "={{ $json.statistic.hours36 }}"
             },
             {
-              "currentKey": "['ÐÐ¾Ð»Ð¸ÑÐµÑÑÐ²Ð¾ ÑÐ°Ð±Ð¾ÑÐ¸Ñ ÑÐ°ÑÐ¾Ð² Ð¿ÑÐ¸ 24-ÑÐ°ÑÐ¾Ð²Ð¾Ð¹ ÑÐ°Ð±Ð¾ÑÐµÐ¹ Ð½ÐµÐ´ÐµÐ»Ðµ']",
-              "newKey": "Количество рабочих часов при 24-часовой рабочей неделе"
+              "name": "Количество рабочих часов при 24-часовой рабочей неделе",
+              "type": "numberValue",
+              "numberValue": "={{ $json.statistic.hours24 }}"
             }
           ]
         },
-        "additionalOptions": {}
+        "include": "selected",
+        "options": {}
       },
-      "id": "a07fad12-ac21-4597-b04a-f88cf019e93c",
-      "name": "Rename Keys",
-      "type": "n8n-nodes-base.renameKeys",
-      "typeVersion": 1,
+      "id": "dcb6290d-8858-4b4e-a354-9756b33acb37",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
       "position": [
         1700,
-        540
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "[\"Год/Месяц\"]",
+              "field2": "[\"Год/Месяц\"]"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5891e036-aa0a-4113-87bf-695e41f6d124",
+      "name": "С предварительным мапингом",
+      "type": "n8n-nodes-base.compareDatasets",
+      "typeVersion": 2.3,
+      "position": [
+        1920,
+        220
       ]
     }
   ],
@@ -209,9 +240,14 @@
       "main": [
         [
           {
-            "node": "Rename Keys",
+            "node": "Compare Datasets2",
             "type": "main",
-            "index": 0
+            "index": 1
+          },
+          {
+            "node": "С предварительным мапингом",
+            "type": "main",
+            "index": 1
           }
         ]
       ]
@@ -223,17 +259,22 @@
             "node": "Compare Datasets2",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
     },
-    "Rename Keys": {
+    "Edit Fields": {
       "main": [
         [
           {
-            "node": "Compare Datasets2",
+            "node": "С предварительным мапингом",
             "type": "main",
-            "index": 1
+            "index": 0
           }
         ]
       ]
@@ -243,10 +284,10 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "6ab877bb-7565-48e2-9287-641d096f5331",
-  "id": "iLBY8gaygDDmaBsl",
+  "versionId": "09d850ba-b4c8-481f-ab45-67100370ae7e",
+  "id": "MjEwaTbLy3sRK3LR",
   "meta": {
-    "instanceId": "bb8644d21ea19b547386158a5bd337d23755d71d8638996e47c2fdaf6b2fdab2"
+    "instanceId": "acaad5eb80d386372907382f903e2a68c144dfc9cc186fe05dca36781182596c"
   },
   "tags": []
 }
